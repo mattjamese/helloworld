@@ -18,15 +18,20 @@ pipeline {
       }
     }
     
-	stage('Remove Old Containers'){	      
-	    def dockerRM = 'docker rm -f helloworld'
-	    sh "${dockerRM}"	     
+	stage('Remove Old Containers'){	 
+		agent any     
+	    steps {
+	    	def dockerRM = 'docker rm -f helloworld'
+	    	sh "${dockerRM}"
+	    }	     
 	}
   
-	stage('Deploy-Dev'){	 
-	      input 'Deploy  to Dev?'
-	      def dockerRun = 'docker run -d -p 8091:8091 --name helloworld helloworld'
-	      sh "${dockerRun}"	 
+	stage('Deploy-Dev'){	
+		agent any     
+	    steps { 
+	      	def dockerRun = 'docker run -d -p 8091:8091 --name helloworld helloworld'
+	      	sh "${dockerRun}"
+	    }	 
 	}   
     
   }
