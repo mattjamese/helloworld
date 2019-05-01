@@ -11,26 +11,24 @@ pipeline {
         sh 'mvn clean install'
       }
     }
+    stage('Remove Old Containers'){	 
+		agent any     
+	    steps {
+	    	sh 'docker rm -f helloworld'	    	
+	    }	     
+	}
+	
     stage('Docker Build') {
       agent any
       steps {
         sh 'docker build -t helloworld:latest .'
       }
     }
-    
-	stage('Remove Old Containers'){	 
-		agent any     
-	    steps {
-	    	def dockerRM = 'docker rm -f helloworld'
-	    	sh "${dockerRM}"
-	    }	     
-	}
   
 	stage('Deploy-Dev'){	
 		agent any     
 	    steps { 
-	      	def dockerRun = 'docker run -d -p 8091:8091 --name helloworld helloworld'
-	      	sh "${dockerRun}"
+	      	sh 'docker run -d -p 8091:8091 --name helloworld helloworld'
 	    }	 
 	}   
     
