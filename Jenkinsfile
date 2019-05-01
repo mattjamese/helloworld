@@ -18,12 +18,9 @@ pipeline {
       }
     }
     
-	stage('Remove Old Containers'){   
-	  try{       
+	stage('Remove Old Containers'){	      
 	    def dockerRM = 'docker rm -f helloworld'
-	    sh "${dockerRM}"
-	  }catch(error){
-	  }      
+	    sh "${dockerRM}"	     
 	}
   
 	stage('Deploy-Dev'){	 
