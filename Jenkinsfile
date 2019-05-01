@@ -11,12 +11,12 @@ pipeline {
         sh 'mvn clean install'
       }
     }
-    stage('Remove Old Containers'){	 
-		agent any     
-	    steps {
-	    	sh 'docker rm -f helloworld'	    	
-	    }	     
-	}
+    //stage('Remove Old Containers'){	 
+		//agent any     
+	    //steps {
+	    	//sh 'docker rm -f helloworld'	    	
+	   // }	     
+	//}
 	
     stage('Docker Build') {
       agent any
