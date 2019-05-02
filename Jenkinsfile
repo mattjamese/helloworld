@@ -12,14 +12,16 @@ pipeline {
       }
     }
     stage('Remove Old Containers'){	 
-		agent any  
-		try{   
-		    steps {
-		    	sh 'docker rm -f helloworld'	    	
-		    }	  
-		 }catch(error){
-
-      }   
+		agent any     
+	    steps {
+	    	    script {
+					  try {
+					      sh 'docker rm -f helloworld'	
+					  } catch (Exception e) {
+					      sh 'No container exception!'
+					  }
+					}	
+				}	     
 	}
 	
     stage('Docker Build') {
@@ -39,13 +41,5 @@ pipeline {
   }
 }
 
-
-	try{
-        def sshCmd = 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.18.198'
-        def dockerRM = 'docker rm -f my-app'
-        sh "${sshCmd} ${dockerRM}"
-      }catch(error){
-
-      }
 
 
