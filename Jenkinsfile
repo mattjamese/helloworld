@@ -14,7 +14,11 @@ pipeline {
     stage('Remove Old Containers'){	 
 		agent any     
 	    steps {
-	    	sh 'docker rm -f helloworld'	    	
+	    		try{
+			       	sh 'docker rm -f helloworld'
+			      }catch(error){
+			
+			      }    	
 	    }	     
 	}
 	
@@ -34,3 +38,8 @@ pipeline {
     
   }
 }
+
+
+	
+
+
