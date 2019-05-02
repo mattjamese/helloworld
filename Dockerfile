@@ -1,5 +1,6 @@
 FROM java:8
 VOLUME /tmp
-ADD target/helloworld-0.0.1-SNAPSHOT.jar helloworld.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/helloworld.jar"]
-
+ARG JAR_FILE
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+EXPOSE 8091
